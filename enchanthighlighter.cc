@@ -1,6 +1,5 @@
 #include "enchanthighlighter.hh"
 #include <enchant++.h>
-#include <QDebug>
 
 EnchantHighlighter::EnchantHighlighter(QTextDocument *parent) :
     QSyntaxHighlighter(parent)
