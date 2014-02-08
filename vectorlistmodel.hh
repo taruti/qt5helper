@@ -10,13 +10,39 @@ class VectorListModel : public QAbstractListModel
     std::vector<std::string> vec_ = {};
     Qt::ItemFlags flags_;
 public:
-    VectorListModel(Qt::ItemFlags flags) : flags_(flags) {}
-    void add(std::string s) {
-        auto len = vec_.size();
-        beginInsertRows(QModelIndex(), len, len);
-        vec_.push_back(std::move(s));
+    // vector interface
+    using value_type = std::string;
+    using size_type = std::vector<std::string>::size_type;
+    size_type size() const { return vec_.size(); }
+    void resize (size_type n, value_type val = value_type()) {
+        int ldiff = vec_.size() - n;
+        if(ldiff < 0) { // grow
+            beginInsertRows(QModelIndex{}, vec_.size(), n);
+            vec_.resize(n);
+            endInsertRows();
+        } else if(ldiff > 0) { // shrink
+            beginRemoveRows(QModelIndex{}, n, vec_.size());
+            vec_.resize(n, std::move(val));
+            endRemoveRows();
+        }
+    }
+    bool empty() const { return vec_.empty(); }
+    void push_back (const value_type& val) {
+        beginInsertRows(QModelIndex{}, vec_.size(), vec_.size());
+        vec_.push_back(val);
         endInsertRows();
     }
+    template <class... Args>
+    void emplace_back (Args&&... args) {
+        beginInsertRows(QModelIndex{}, vec_.size(), vec_.size());
+        vec_.emplace_back(std::forward(args)...);
+        endInsertRows();
+    }
+
+
+    // QAbstractListModel interface
+
+    VectorListModel(Qt::ItemFlags flags) : flags_(flags) {}
 
     int rowCount(const QModelIndex&) const {
         return vec_.size();
