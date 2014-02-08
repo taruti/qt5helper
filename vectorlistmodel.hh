@@ -15,6 +15,16 @@ public:
     using reference = std::vector<std::string>::reference;
     using const_reference = std::vector<std::string>::const_reference;
     using size_type = std::vector<std::string>::size_type;
+    using iterator = std::vector<std::string>::iterator;
+    using const_iterator = std::vector<std::string>::const_iterator;
+
+    iterator begin() { return vec_.begin(); }
+    const_iterator begin() const { return vec_.begin(); }
+    iterator end() { return vec_.end(); }
+    const_iterator end() const { return vec_.end(); }
+    const_iterator cbegin() const noexcept { return vec_.cbegin(); }
+    const_iterator cend() const noexcept { return vec_.cend(); }
+
     size_type size() const { return vec_.size(); }
     void resize (size_type n, value_type val = value_type()) {
         int ldiff = vec_.size() - n;
