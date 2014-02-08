@@ -12,6 +12,8 @@ class VectorListModel : public QAbstractListModel
 public:
     // vector interface
     using value_type = std::string;
+    using reference = std::vector<std::string>::reference;
+    using const_reference = std::vector<std::string>::const_reference;
     using size_type = std::vector<std::string>::size_type;
     size_type size() const { return vec_.size(); }
     void resize (size_type n, value_type val = value_type()) {
@@ -27,6 +29,8 @@ public:
         }
     }
     bool empty() const { return vec_.empty(); }
+    reference operator[] (size_type n) { return vec_[n]; }
+    const_reference operator[] (size_type n) const { return vec_[n]; }
     void push_back (const value_type& val) {
         beginInsertRows(QModelIndex{}, vec_.size(), vec_.size());
         vec_.push_back(val);
