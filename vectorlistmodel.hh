@@ -30,7 +30,7 @@ public:
         int ldiff = vec_.size() - n;
         if(ldiff < 0) { // grow
             beginInsertRows(QModelIndex{}, vec_.size(), n);
-            vec_.resize(n);
+            vec_.resize(n, std::move(val));
             endInsertRows();
         } else if(ldiff > 0) { // shrink
             beginRemoveRows(QModelIndex{}, n, vec_.size());
