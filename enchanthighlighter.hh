@@ -18,7 +18,7 @@ class EnchantHighlighter : public QSyntaxHighlighter
     void check(const QString &ref, int, int);
 public:
     explicit EnchantHighlighter(QTextDocument *parent = 0);
-    ~EnchantHighlighter();
+    virtual ~EnchantHighlighter();
 
     bool setLanguage(const std::string &language);
     virtual void highlightBlock(const QString &text) override;
