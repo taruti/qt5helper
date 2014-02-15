@@ -40,6 +40,9 @@ void EnchantHighlighter::highlightBlock(const QString& text) {
 bool EnchantHighlighter::setLanguage(const std::string &lang) {
     if(!enchant::Broker::instance()->dict_exists(lang))
         return false;
+	if(dict && dict->get_lang() == lang)
+		return true;
     dict.reset(enchant::Broker::instance()->request_dict(lang));
+	rehighlight();
     return true;
 }
