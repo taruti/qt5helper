@@ -11,23 +11,25 @@ struct SingleTextEdit : QTextEdit {
 		setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 		setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
  	}
-	void keyPressEvent(QKeyEvent *event) {
+	virtual void keyPressEvent(QKeyEvent *event) override {
 		if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
 			event->ignore();
 		else
 			QTextEdit::keyPressEvent(event);
 	}
-	virtual QSize minimumSizeHint () const {
+	virtual QSize minimumSizeHint () const override {
 		return sizeHint();
 	}
-	virtual QSize sizeHint() const {
+	virtual QSize sizeHint() const override {
 		QFontMetrics fm(font());
 		int h = qMax(fm.height(), 14) + 4;
 		return QSize{100,h};
 	}
-	void wheelEvent(QWheelEvent *e) {
+	virtual void wheelEvent(QWheelEvent *e) override {
 		e->ignore();
 	}
+private:
+	Q_OBJECT
 };
 
 #endif /* SINGLETEXTEDIT_HH */
