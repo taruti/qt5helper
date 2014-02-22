@@ -10,7 +10,7 @@ struct SingleTextEdit : QTextEdit {
 		setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 		setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 		setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
- 	}
+	}
 	virtual void keyPressEvent(QKeyEvent *event) override {
 		if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
 			event->ignore();
@@ -23,7 +23,7 @@ struct SingleTextEdit : QTextEdit {
 	virtual QSize sizeHint() const override {
 		QFontMetrics fm(font());
 		int h = qMax(fm.height(), 14) + 4;
-		return QSize{100,h};
+		return QSize {100, h};
 	}
 	virtual void wheelEvent(QWheelEvent *e) override {
 		e->ignore();
