@@ -13,14 +13,18 @@ namespace enchant {
 class EnchantHighlighter : public QSyntaxHighlighter
 {
 	Q_OBJECT
-	std::unique_ptr<enchant::Dict> dict;
 	QTextCharFormat format;
-	void check(const QString &ref, int, int);
+	using dict_ptr = std::unique_ptr<enchant::Dict>;
+	dict_ptr dict;
+	std::vector<dict_ptr> inactives;
+	unsigned nwords = 0;
+	unsigned nerrors = 0;
+	
 public:
 	explicit EnchantHighlighter(QTextDocument *parent = 0);
 	virtual ~EnchantHighlighter();
 
-	bool setLanguage(const std::string &language);
+	bool addLanguage(const std::string &language);
 	virtual void highlightBlock(const QString &text) override;
 };
 
