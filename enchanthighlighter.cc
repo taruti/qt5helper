@@ -45,12 +45,11 @@ static double checkErrorProbability(enchant::Dict *d, const QString &text)
     return (double)errors/(double)(words?words:1);
 }
 
-
 void EnchantHighlighter::highlightBlock(const QString& text) {
     if(!dict)
         return;
 
-    if(4*nerrors > nwords && !inactives.empty()) {
+    if(4*nerrors > nwords+6 && !inactives.empty()) {
         auto whole = document()->toPlainText();
         auto base = checkErrorProbability(dict.get(), whole);
         auto changed = false;
@@ -63,9 +62,14 @@ void EnchantHighlighter::highlightBlock(const QString& text) {
             }
         }
         if(changed) {
-            rehighlight();
             nerrors = 0;
             nwords = 0;
+			// When changing highlighting we want to rehighlight
+			// everything. Calling 'rehighlight' would be logical
+			// but due to Qt it crashes...
+			// This workaround works without crashes.
+			setDocument(document());
+			return;
         }
     }
 
