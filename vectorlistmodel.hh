@@ -56,7 +56,7 @@ public:
 
     // QAbstractListModel interface
 
-    VectorListModel(Qt::ItemFlags flags) : flags_(flags) {}
+    explicit VectorListModel(Qt::ItemFlags flags) : flags_(flags) {}
 
     int rowCount(const QModelIndex&) const {
         return vec_.size();
