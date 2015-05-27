@@ -11,8 +11,7 @@ EnchantHighlighter::EnchantHighlighter(QTextDocument *parent) :
 EnchantHighlighter::~EnchantHighlighter() {}
 
 void EnchantHighlighter::check(const QString &text, int begin, int i) {
-    QStringRef sub(&text, begin, i-begin);
-    auto ba = sub.toUtf8();
+    auto ba = QStringRef(&text, begin, i-begin).toUtf8();
     if(!dict->check(std::string {ba.data(), (std::string::size_type)ba.size()}))
         setFormat(begin, i-begin, format);
 }
