@@ -5,10 +5,10 @@
 
 class VectorListModel : public QAbstractListModel
 {
-    Q_OBJECT
+	Q_OBJECT
 
-    std::vector<std::string> vec_ = {};
-    Qt::ItemFlags flags_;
+	std::vector<std::string> vec_ = {};
+	Qt::ItemFlags flags_;
 public:
     // vector interface
     using value_type = std::string;
