@@ -37,11 +37,7 @@ static double checkErrorProbability(enchant::Dict *d, const QString &text)
             }
         }
     }
-    if(begin < i) {
-        words++;
-        if(isErrorWord(d,text,begin, i))
-            errors++;
-    }
+	// Skip checking partial words here.
     return (double)errors/(double)(words?words:1);
 }
 
