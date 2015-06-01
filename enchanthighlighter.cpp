@@ -1,4 +1,4 @@
-#include "enchanthighlighter.hh"
+#include "enchanthighlighter.hpp"
 #include <enchant++.h>
 #include <QTextDocument>
 

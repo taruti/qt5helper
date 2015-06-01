@@ -8,7 +8,7 @@ set(CMAKE_AUTOMOC ON)
 add_definitions(-std=c++11)
 
 find_package(Qt5Widgets)
-add_library(qt5helper STATIC enchanthighlighter.cc)
+add_library(qt5helper STATIC enchanthighlighter.cpp vectorlistmodel.cpp)
 qt5_use_modules(qt5helper Widgets)
 
 find_package(Enchant)

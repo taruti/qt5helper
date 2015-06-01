@@ -1,4 +1,4 @@
-#include "vectorlistmodel.hh"
+#include "vectorlistmodel.hpp"
 
 VectorListModel::~VectorListModel()
 {
